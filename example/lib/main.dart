@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  Duration _duration = Duration(seconds: 1000000);
+  Duration _duration = Duration(seconds: 8650000);
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
             _buildSpace(),
             Text('Slide direction Down'),
             SlideCountdownClock(
+              shouldShowDays: true,
               duration: _duration,
-              slideDirection: SlideDirection.Down,
+              slideDirection: SlideDirection.Up,
               separator: ":",
               textStyle: TextStyle(
                 fontSize: 20,
@@ -75,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: EdgeInsets.all(10),
               child: SlideCountdownClock(
+                shouldShowDays: true,
                 duration: _duration,
                 slideDirection: SlideDirection.Up,
                 separator: "-",

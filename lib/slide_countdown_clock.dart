@@ -82,15 +82,7 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
   @override
   Widget build(BuildContext context) {
     Widget dayDigits;
-    if (timeLeft.inDays > 99) {
-      List<Function> digits = [];
-      for (int i = timeLeft.inDays.toString().length - 1; i >= 0; i--) {
-        digits.add((DateTime time) =>
-            ((timeLeft.inDays) ~/ math.pow(10, i) % math.pow(10, 1)).toInt());
-      }
-      dayDigits = _buildDigitForLargeNumber(
-          timeStream, digits, DateTime.now(), 'daysHundreds');
-    } else {
+
       dayDigits = _buildDigit(
         timeStream,
             (DateTime time) => (timeLeft.inDays) ~/ 10,
@@ -98,21 +90,18 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
         DateTime.now(),
         "Days",
       );
-    }
+
 
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Column(
-          children: [
-            (shouldShowDays) ? dayDigits : SizedBox(),
-            Text("Days"),
-          ],
-        ),
+        (shouldShowDays) ? dayDigits : SizedBox(),
         (shouldShowDays) ? _buildSpace() : SizedBox(),
         (widget.separator.isNotEmpty && shouldShowDays)
             ? _buildSeparator()
             : SizedBox(),
+
+        _buildSpace(),
         _buildDigit(
           timeStream,
               (DateTime time) => (timeLeft.inHours % 24) ~/ 10,
@@ -242,6 +231,11 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
             ),
           ],
         ),
+      Column(
+        children: [
+          Text(id)
+        ],
+      )
       ],
     );
   }
